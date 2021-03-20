@@ -1,30 +1,30 @@
 
-const Category = require("../model/category")
+const Category = require("../model/category.js")
+
 
 // To create category
   exports.createCategory = (req, res) => 
   {
+  
     const category = new Category(req.body); //object //Category comes from Model
-    category.save((err, bakend_category) =>
-     {
-      if (err) 
+    category.save((err, bakend_category) => 
+    {
+      if (err)  
        {
-        return res.status(400).json
-        ({
+        return res.status(400).json ({
            error: "NOT able to save category in DB"
          });
         }
-      res.json({ bakend_category  });
+      res.json({ bakend_category });
      });
    };
 
 
-
    
- // to read all category 
+ // to read all category   
  exports.getAllCategory = (req, res) => 
  {
-   
+    
    Category.find().exec((err, categories) => 
    {
      if (err) {
@@ -37,3 +37,65 @@ const Category = require("../model/category")
    });
  };
   
+ //to read category 
+ exports.getCategorybyId = (req, res, next, id) => 
+ {
+   Category.findById(id)
+     .exec((err, categoryData) => 
+     {
+       if (err) {
+         return res.status(400).json({
+           error: "Category not found"
+         });
+       }
+ 
+       req.category = categoryData;  //global variable 
+ 
+       next();
+     
+     });
+   };
+ 
+   //to read category byId
+   exports.getCategory = (req, res) => 
+ {
+     return res.json(req.category);
+  
+ };
+ 
+ //to remove category bycategoryId
+   exports.removeCategory = (req, res) =>
+    {
+     const category = req.category;
+   
+     category.remove((err, category) => {
+       if (err) {
+         return res.status(400).json({
+           error: "Failed to delete this category"
+         });
+       }
+       res.json({
+         message: "Successfull deleted"
+      
+       });
+     });
+   };
+ 
+  
+ // to read all Product 
+ exports.getAllProduct = (req, res) => 
+ {
+    
+   Product.find().exec((err, categories) => 
+   {
+     if (err) {
+       return res.status(400).json({
+         error: "NO categories found"
+       });
+     }
+
+     res.json(product);
+   });
+ };
+  
+ 

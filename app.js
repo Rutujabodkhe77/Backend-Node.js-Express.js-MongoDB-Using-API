@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const express = require('express') //variable created with loaded express library.
-const app = express()   // store express function inside app variable
+const express = require('express'); //variable created with loaded express library.
+const app = express();   // store express function inside app variable
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const port = 3100  //use port from 3001 to 3100
 
-
+ 
 mongoose.connect('mongodb+srv://myshop:myshop@cluster0.hfbz0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
  {useNewUrlParser: true, 
     useUnifiedTopology: true,
@@ -21,14 +21,24 @@ app.use(cookieParser());
 app.use(cors());
 
 //My routes
-const categoryRoutes = require("./routes/category");
-// const productRoutes = require("./routes/productRoutes");
+const categoryRoutes = require("./routes/category"); //shop category
+const productRoutes = require("./routes/productRoutes"); //shop product
+const userRoutes = require("./routes/userRoutes"); //user
+const orderRoutes = require("./routes/orderRoutes"); //order
 
 //My Routes
-app.use("/api", categoryRoutes);
-// app.use("/api", productRoutes);
+app.use("/api", categoryRoutes); //shope category
+app.use("/api", productRoutes); //shop product
+app.use("/api", userRoutes);  //user
+app.use("/api", orderRoutes); //orders
   
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+
+
+
+
+
+
 
 
 // in node js here we use  "require" insted of "import"
