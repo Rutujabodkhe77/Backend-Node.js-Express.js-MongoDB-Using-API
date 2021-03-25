@@ -7,6 +7,7 @@ const {createCategory} = require("../controller/category.js");
 const {getAllCategory} = require("../controller/category.js");
 const {getCategorybyId} = require("../controller/category.js");
 const {removeCategory} = require("../controller/category.js");
+const {updateCategory} = require("../controller/category.js");
 
 router.param("categoryId",getCategorybyId); //param : parameter
 
@@ -15,7 +16,7 @@ router.param("categoryId",getCategorybyId); //param : parameter
 router.post("/category/create/",createCategory);
 router.get("/category/getAllCategories/",getAllCategory);
 // router.post("/removeCategory",getAllCategory);
-
+router.put("/category/:categoryId ",updateCategory);
 router.delete("/category/:categoryId",removeCategory); // colon (:) is param
 
 

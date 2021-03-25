@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { check } = require("express-validator");
-const { register,login,getAllUser, getUserbyId ,getUser, removeUser} = require("../controller/UserController");
+const { register,login,getAllUser, getUserbyId ,getUser,updateUser, removeUser} = require("../controller/UserController");
 
 // Register User
 router.post("/register",
@@ -32,6 +32,7 @@ router.get("/userbyid/:userId", getUser)  //http://localhost:3100/api/userbyid/6
 
 //Remove User
 router.delete("/removeuserbyid/:userId",removeUser); //http://localhost:3100/api/removeuserbyid/60540932224cbe25e87dfec8 (....DONE)
+router.put("/user/:userId",updateUser); //http://localhost:3100/api/user/60540932224cbe25e87dfec8 (....DONE)
 
 
 module.exports = router;

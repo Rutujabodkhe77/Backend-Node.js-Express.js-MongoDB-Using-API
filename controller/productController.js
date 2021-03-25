@@ -78,7 +78,24 @@ exports.getProduct = (req, res) =>
  
 };
 
+//to Update category bycategoryId
+exports.updateProduct = (req, res) => // http://localhost:3100/api/product/605408d4224cbe25e87dfec6
+{
+ const product = req.product;
 
+ product.name = req.body.name;
+//  product.mobile = req.body.mobile;
+ 
+ product.save((err, updateProduct) => {
+   if (err) {
+     return res.status(400).json({
+       error: "Failed to update Product"
+     });
+   }
+   res.json(updateProduct);
+ });
+};
+  
 
 //to remove product byproductId
 exports.removeProduct = (req, res) =>

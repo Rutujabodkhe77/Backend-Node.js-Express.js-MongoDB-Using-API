@@ -18,8 +18,6 @@ const Category = require("../model/category.js")
       res.json({ bakend_category });
      });
    };
-
-
    
  // to read all category   
  exports.getAllCategory = (req, res) => 
@@ -62,8 +60,9 @@ const Category = require("../model/category.js")
      return res.json(req.category);
   
  };
- 
+  
  //to remove category bycategoryId
+  //  (Completed but some query is there)
    exports.removeCategory = (req, res) =>
     {
      const category = req.category;
@@ -80,6 +79,25 @@ const Category = require("../model/category.js")
        });
      });
    };
+ 
+ //to Update category bycategoryId
+   exports.updateCategory = (req, res) =>
+    {
+     const category = req.category;
+
+     category.name = req.body.name;
+    //  category.mobile = req.body.mobile;
+     
+     category.save((err, updateCategory) => {
+       if (err) {
+         return res.status(400).json({
+           error: "Failed to update category"
+         });
+       }
+       res.json(updateCategory);
+     });
+   };
+ 
  
   
  // to read all Product 

@@ -102,6 +102,25 @@ exports.register = (req, res) =>
  
 };
 
+
+ //to Update user byuserId
+ exports.updateUser = (req, res) =>
+ {
+  const user = req.user;
+
+  user.name = req.body.name;
+ //  userinfo.mobile = req.body.mobile;
+  
+ user.save((err, updateUserinfo) => {
+    if (err) {
+      return res.status(400).json({
+        error: "Failed to update Userinfo"
+      });
+    }
+    res.json(updateUserinfo);
+  });
+};
+
   
       //to remove user byuserId
      exports.removeUser = (req, res) =>
