@@ -33,9 +33,9 @@ app.use("/api", userRoutes);  //user
 app.use("/api", orderRoutes); //orders
   
 // app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+app.use('/uploads', express.static('uploads'));
 
-app.listen(process.env.PORT || 3000, () => console.log(`Example app listening at http://localhost:${port}`))
-
+app.listen(process.env.PORT || 3100, () => console.log(`Example app listening at http://localhost:${port}`))
 
 
 

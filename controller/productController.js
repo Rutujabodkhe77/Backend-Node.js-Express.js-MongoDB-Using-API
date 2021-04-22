@@ -8,7 +8,7 @@ exports.createProduct =
  {
  
   const product = new Product(req.body);
- 
+  products.photo = req.file.path;
   product.save((err, category) => 
   {
     if (err) 
